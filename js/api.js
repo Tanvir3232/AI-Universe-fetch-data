@@ -1,11 +1,20 @@
-const loadAllData = async() =>{
+const loadAllData = async limitData =>{
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const data = await res.json();
-    displayAllData(data.data.tools);
+    displayAllData(data.data.tools,limitData);
 }
-const displayAllData = allData =>{
+const displayAllData = (allData,limitData) =>{
     const allAiCardsContainer = document.getElementById('all-ai-cards-container');
+    allAiCardsContainer.textContent = '';
+    const seeMore = document.getElementById('see-more');
+    //Initialy user see only 6 data using limit
+    if(limitData){
+        allData = allData.slice(0,limitData);
+    }
+    else{
+        seeMore.classList.add('hidden');
+    }
     for(const data of allData){
         console.log(data);
         const dataDiv = document.createElement('div');
@@ -44,7 +53,7 @@ const loadSingle =async id =>{
 }
 const showSingleDetails = data =>{
     const detailsContainer = document.getElementById('details-container');
-    console.log(data);
+    
     detailsContainer.innerHTML = `
        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
@@ -90,4 +99,10 @@ const showSingleDetails = data =>{
        
     `;
 }
-loadAllData();
+const seeMoreBtn = document.getElementById('see-more-btn');
+seeMoreBtn.addEventListener('click',function(){
+      
+      seeMoreBtn.classList.add('d-none');
+      loadAllData();
+});
+loadAllData(6);
