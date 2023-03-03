@@ -1,8 +1,18 @@
 const loadAllData = async limitData =>{
+    toggleLoader(true);
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const data = await res.json();
     displayAllData(data.data.tools,limitData);
+}
+//for loader
+const toggleLoader = isLoading =>{
+    const loader = document.getElementById('loader');
+    if(isLoading){
+        loader.classList.remove('hidden');
+    }else{
+        loader.classList.add('hidden');
+    }
 }
 const displayAllData = (allData,limitData) =>{
     const allAiCardsContainer = document.getElementById('all-ai-cards-container');
@@ -11,6 +21,7 @@ const displayAllData = (allData,limitData) =>{
     //Initialy user see only 6 data using limit
     if(limitData){
         allData = allData.slice(0,limitData);
+        seeMore.classList.remove('hidden');
     }
     else{
         seeMore.classList.add('hidden');
@@ -44,6 +55,7 @@ const displayAllData = (allData,limitData) =>{
         `;
         allAiCardsContainer.appendChild(dataDiv);
     }
+    toggleLoader(false);
 }
 const loadSingle =async id =>{
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id<10?'0'+id:id}`;
