@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <script src="https://kit.fontawesome.com/bda40edf9e.js" crossorigin="anonymous"></script>
     <title>AI Universe</title>
 </head>
 <body>
@@ -16,14 +16,30 @@
     </header>
 
     <main>
-       <!-- features section  -->
+       <!-- ALL AI cards section  -->
        <section class="w-11/12 mx-auto flex flex-col justify-center">
-            <div class="features-container">
+            <div id="all-ai-cards-container" class="grid md:grid-cols-3 gap-5 my-5">
 
             </div>
             <button class="bg-red-500 text-white w-1/12 mx-auto rounded-lg py-2">See more</button>
        </section>
     </main>
+    <!-- modal section  -->
+    
+    
+
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+    <div class="modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+        <div id="details-container">
+           
+        </div>
+        <div class="modal-action">
+        <label for="my-modal-5" class="btn">close</label>
+        </div>
+    </div>
+    </div>
     <script src="js/api.js"></script>
 </body>
 </html>
