@@ -47,10 +47,10 @@ const showSingleDetails = data =>{
     console.log(data);
     detailsContainer.innerHTML = `
        
-        <div class="grid grid-cols-2 gap-5 p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
            <div class="bg-red-50 rounded-lg shadow-xl p-3">
                <h1 class="text-lg font-semibold">${data.description}</h1>
-               <div class="grid grid-cols-3 gap-3 mt-3">
+               <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
                   <div class="bg-stone-50 p-3">
                      <h1 class="text-center text-xl font-semibold text-green-400">${data.pricing[0].price} <br> ${data.pricing[0].plan}</h1>
                   </div>
@@ -61,7 +61,7 @@ const showSingleDetails = data =>{
                      <h1 class="text-center text-xl font-semibold text-red-400">${data.pricing[2].price} <br> ${data.pricing[2].plan}</h1>
                   </div>
                </div>
-               <div class="flex gap-3 mt-5">
+               <div class="flex flex-col md:flex-row gap-3 mt-5">
                    <div>
                         <h1 class="text-xl font-semibold">Features</h1>
                         <ul class="list-disc ml-5">
