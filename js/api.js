@@ -1,9 +1,9 @@
-const loadAllData = async limitData =>{
+const loadAllData = async (limitData,sortMsg) =>{
     toggleLoader(true);
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(url);
     const data = await res.json();
-    displayAllData(data.data.tools,limitData);
+    displayAllData(data.data.tools,limitData,sortMsg);
 }
 //for loader
 const toggleLoader = isLoading =>{
@@ -14,7 +14,7 @@ const toggleLoader = isLoading =>{
         loader.classList.add('hidden');
     }
 }
-const displayAllData = (allData,limitData) =>{
+const displayAllData = (allData,limitData,sortMsg) =>{
     const allAiCardsContainer = document.getElementById('all-ai-cards-container');
     allAiCardsContainer.textContent = '';
     const seeMore = document.getElementById('see-more');
@@ -26,8 +26,14 @@ const displayAllData = (allData,limitData) =>{
     else{
         seeMore.classList.add('hidden');
     }
+    if(sortMsg){
+        allData.sort((a, b) => a.published_in - b.published_in);
+        console.log(allData);
+    }
+    
+
     for(const data of allData){
-        console.log(data);
+        
         const dataDiv = document.createElement('div');
         dataDiv.classList.add('card','card-compact', 'bg-base-100', 'shadow-xl');
         dataDiv.innerHTML = `
@@ -66,7 +72,7 @@ const showSingleDetails = data =>{
     detailsContainer.innerHTML = `
        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-2 md:p-5">
-           <div class="bg-red-50 rounded-lg shadow-xl p-3">
+           <div class="bg-red-50 border-solid border-2 border-red-300 rounded-lg shadow-xl p-3">
                <h1 class="text-lg font-semibold">${data.description?data.description:"No description"}</h1>
                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
                   
@@ -117,4 +123,7 @@ seeMoreBtn.addEventListener('click',function(){
       seeMoreBtn.classList.add('d-none');
       loadAllData();
 });
-loadAllData(6);
+document.getElementById('sort-btn').addEventListener('click',function(){
+    loadAllData(6,true);
+})
+loadAllData(6,false);
