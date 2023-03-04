@@ -62,17 +62,16 @@ const loadSingle =async id =>{
 }
 const showSingleDetails = data =>{
     const detailsContainer = document.getElementById('details-container');
-    console.log(data);
     detailsContainer.innerHTML = `
        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
            <div class="bg-red-50 rounded-lg shadow-xl p-3">
-               <h1 class="text-lg font-semibold">${data.description}</h1>
+               <h1 class="text-lg font-semibold">${data.description?data.description:"No description"}</h1>
                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
                   
                   ${data.pricing.map(course => `
                     <div class="bg-stone-50 p-3">
-                      <h1 class="text-center text-xl font-semibold text-red-400">${course.price} <br> ${course.plan}</h1>
+                      <h1 class="text-center text-xl font-semibold text-red-400">${course.price?course.price:"free of cost"} <br> ${course.plan}</h1>
                     </div>`).join('')}
 
               
@@ -87,19 +86,21 @@ const showSingleDetails = data =>{
                            <li>${data.features[3].feature_name}</li>
                            
                         </ul>
+                      
                    </div>
                    <div>
                         <h1 class="text-xl font-semibold">Integrations</h1>
                         <ul class="list-disc ml-5"> 
-                          ${data.integrations.map(integration => `<li>${integration}</li>`).join("")}
+                          ${data.integrations.length>0?data.integrations.map(integration => `<li>${integration}</li>`).join(""):"No data found"}
+                          
                         </ul>
                    </div>
                </div>
            </div>
            <div class="shadow-xl p-3 rounded-lg">
               <figure><img src="${data.image_link[0]}" alt="Album"/></figure>
-              <h1 class="text-center text-lg font-semibold">${data.input_output_examples[0].input}</h1>
-              <h1 class="text-center text-lg">${data.input_output_examples[0].output}</h1>
+              <h1 class="text-center text-lg font-semibold">${data.input_output_examples[0].input?data.input_output_examples[0].input:"No question found"}</h1>
+              <h1 class="text-center text-lg">${data.input_output_examples[0].output?data.input_output_examples[0].output:"No answer found"}</h1>
            </div>
            
         </div>
