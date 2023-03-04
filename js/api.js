@@ -31,14 +31,11 @@ const displayAllData = (allData,limitData,sortMsg) =>{
          allData.sort(function(a, b) {
             return new Date(a.published_in) - new Date(b.published_in);
           });
-          
-        
-        console.log(allData);
     }
     
 
     for(const data of allData){
-        
+        console.log(data);
         const dataDiv = document.createElement('div');
         dataDiv.classList.add('card','card-compact', 'bg-base-100', 'shadow-xl');
         dataDiv.innerHTML = `
@@ -81,10 +78,10 @@ const showSingleDetails = data =>{
                <h1 class="text-lg font-semibold">${data.description?data.description:"No description"}</h1>
                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
                   
-                  ${data.pricing.map(course => `
+                  ${data.pricing?data.pricing.map(course => `
                     <div class="bg-stone-50 p-3">
                       <h1 class="text-center text-xl font-semibold text-red-400">${course.price?course.price:"free of cost"} <br> ${course.plan}</h1>
-                    </div>`).join('')}
+                    </div>`).join(''):"no found"}
 
               
 
@@ -103,7 +100,7 @@ const showSingleDetails = data =>{
                    <div>
                         <h1 class="text-xl font-semibold">Integrations</h1>
                         <ul class="list-disc ml-5"> 
-                          ${data.integrations.length>0?data.integrations.map(integration => `<li>${integration}</li>`).join(""):"No data found"}
+                          ${data.integrations?data.integrations.map(integration => `<li>${integration}</li>`).join(""):"No data found"}
                           
                         </ul>
                    </div>
@@ -114,8 +111,8 @@ const showSingleDetails = data =>{
                  <img src="${data.image_link[0]}" alt="Album"/>
                  ${data.accuracy.score?`<span class="bg-red-500 px-4 py-1 -mt-8 md:mt-1 md:top-16 md:right-16  absolute rounded-xl text-white">${data.accuracy.score*100}% accuracy </span>`:''}
               </figure>
-              <h1 class="text-center text-lg font-semibold">${data.input_output_examples[0].input?data.input_output_examples[0].input:"No question found"}</h1>
-              <h1 class="text-center text-lg">${data.input_output_examples[0].output?data.input_output_examples[0].output:"No answer found"}</h1>
+              <h1 class="text-center text-lg font-semibold">${data.input_output_examples?data.input_output_examples[0].input:"No question found"}</h1>
+              <h1 class="text-center text-lg">${data.input_output_examples?data.input_output_examples[0].output:"No answer found"}</h1>
            </div>
            
         </div>
