@@ -29,7 +29,7 @@ const displayAllData = (allData,limitData) =>{
     for(const data of allData){
         console.log(data);
         const dataDiv = document.createElement('div');
-        dataDiv.classList.add('card','card-compact','w-96', 'bg-base-100', 'shadow-xl');
+        dataDiv.classList.add('card','card-compact', 'bg-base-100', 'shadow-xl');
         dataDiv.innerHTML = `
         <figure class="h-60"><img class='h-full'src="${data.image}" alt="Shoes" /></figure>
         <div class="card-body">
