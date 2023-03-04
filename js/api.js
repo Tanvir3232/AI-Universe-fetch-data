@@ -19,7 +19,7 @@ const displayAllData = (allData,limitData,sortMsg) =>{
     allAiCardsContainer.textContent = '';
     const seeMore = document.getElementById('see-more');
     //Initialy user see only 6 data using limit
-    if(limitData){
+    if(limitData==6){
         allData = allData.slice(0,limitData);
         seeMore.classList.remove('hidden');
     }
@@ -27,7 +27,12 @@ const displayAllData = (allData,limitData,sortMsg) =>{
         seeMore.classList.add('hidden');
     }
     if(sortMsg){
-        allData.sort((a, b) => a.published_in - b.published_in);
+        
+         allData.sort(function(a, b) {
+            return new Date(a.published_in) - new Date(b.published_in);
+          });
+          
+        
         console.log(allData);
     }
     
@@ -124,6 +129,6 @@ seeMoreBtn.addEventListener('click',function(){
       loadAllData();
 });
 document.getElementById('sort-btn').addEventListener('click',function(){
-    loadAllData(6,true);
+    loadAllData(12,true);
 })
 loadAllData(6,false);
