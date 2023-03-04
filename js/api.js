@@ -35,7 +35,7 @@ const displayAllData = (allData,limitData,sortMsg) =>{
     
 
     for(const data of allData){
-        console.log(data);
+      
         const dataDiv = document.createElement('div');
         dataDiv.classList.add('card','card-compact', 'bg-base-100', 'shadow-xl');
         dataDiv.innerHTML = `
@@ -69,7 +69,7 @@ const loadSingle =async id =>{
     showSingleDetails(data.data);
 }
 const showSingleDetails = data =>{
-    console.log(data);
+   
     const detailsContainer = document.getElementById('details-container');
     detailsContainer.innerHTML = `
        
@@ -80,8 +80,10 @@ const showSingleDetails = data =>{
                   
                   ${data.pricing?data.pricing.map(course => `
                     <div class="bg-stone-50 p-3">
-                      <h1 class="text-center text-xl font-semibold text-red-400">${course.price?course.price:"free of cost"} <br> ${course.plan}</h1>
-                    </div>`).join(''):"no found"}
+                      <h1 class="text-center text-xl font-semibold text-red-400">${course.price} <br> ${course.plan}</h1>
+                    </div>`).join(''):`<div class="bg-stone-50 p-3">
+                    <h1 class="text-center text-xl font-semibold text-red-400"> Free of cost </h1>
+                  </div>`}
 
               
 
