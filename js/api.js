@@ -35,14 +35,14 @@ const displayAllData = (allData,limitData) =>{
         <div class="card-body">
           <h2 class="card-title">Features</h2>
           <ol class="list-decimal mx-5">
-             ${data.features.map(feature => `<li>${feature}</li>`).join("")}
+             ${data.features.length>0?data.features.map(feature => `<li>${feature}</li>`).join(""):'no'}
           </ol>
           <hr>
           
           <div class="flex justify-between items-center w-full">
              <div>
              <h2 class="card-title">${data.name}</h2>
-             <p><i class="fa-regular fa-calendar-days"></i> ${data.published_in} </p>
+             <p><i class="fa-regular fa-calendar-days"></i> ${data.published_in?data.published_in:"no mentioned"} </p>
              </div>
              <div> 
                  <label onclick="loadSingle(${data.id})" for="my-modal-5" class="btn btn-ghost"> <i  class="fa-solid fa-arrow-right text-red-500 text-2xl"></i> </label>
@@ -61,10 +61,11 @@ const loadSingle =async id =>{
     showSingleDetails(data.data);
 }
 const showSingleDetails = data =>{
+    console.log(data);
     const detailsContainer = document.getElementById('details-container');
     detailsContainer.innerHTML = `
        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-2 md:p-5">
            <div class="bg-red-50 rounded-lg shadow-xl p-3">
                <h1 class="text-lg font-semibold">${data.description?data.description:"No description"}</h1>
                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
@@ -98,7 +99,10 @@ const showSingleDetails = data =>{
                </div>
            </div>
            <div class="shadow-xl p-3 rounded-lg">
-              <figure><img src="${data.image_link[0]}" alt="Album"/></figure>
+              <figure>
+                 <img src="${data.image_link[0]}" alt="Album"/>
+                 ${data.accuracy.score?`<span class="bg-red-500 px-4 py-1 -mt-8 md:mt-1 md:top-16 md:right-16  absolute rounded-xl text-white">${data.accuracy.score*100}% accuracy </span>`:''}
+              </figure>
               <h1 class="text-center text-lg font-semibold">${data.input_output_examples[0].input?data.input_output_examples[0].input:"No question found"}</h1>
               <h1 class="text-center text-lg">${data.input_output_examples[0].output?data.input_output_examples[0].output:"No answer found"}</h1>
            </div>
