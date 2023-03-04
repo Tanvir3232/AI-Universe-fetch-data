@@ -35,10 +35,7 @@ const displayAllData = (allData,limitData) =>{
         <div class="card-body">
           <h2 class="card-title">Features</h2>
           <ol class="list-decimal mx-5">
-            
-            <li>${data.features[0]}</li>
-            <li>${data.features[1]}</li>
-            <li>${data.features[2]}</li>
+             ${data.features.map(feature => `<li>${feature}</li>`).join("")}
           </ol>
           <hr>
           
@@ -65,38 +62,36 @@ const loadSingle =async id =>{
 }
 const showSingleDetails = data =>{
     const detailsContainer = document.getElementById('details-container');
-    
+    console.log(data);
     detailsContainer.innerHTML = `
        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
            <div class="bg-red-50 rounded-lg shadow-xl p-3">
                <h1 class="text-lg font-semibold">${data.description}</h1>
                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
-                  <div class="bg-stone-50 p-3">
-                     <h1 class="text-center text-xl font-semibold text-green-400">${data.pricing[0].price} <br> ${data.pricing[0].plan}</h1>
-                  </div>
-                  <div class="bg-stone-50 p-3">
-                     <h1 class="text-center text-xl font-semibold text-orange-400">${data.pricing[1].price} <br> ${data.pricing[1].plan}</h1>
-                  </div>
-                  <div class="bg-stone-50 p-3">
-                     <h1 class="text-center text-xl font-semibold text-red-400">${data.pricing[2].price} <br> ${data.pricing[2].plan}</h1>
-                  </div>
+                  
+                  ${data.pricing.map(course => `
+                    <div class="bg-stone-50 p-3">
+                      <h1 class="text-center text-xl font-semibold text-red-400">${course.price} <br> ${course.plan}</h1>
+                    </div>`).join('')}
+
+              
+
                </div>
-               <div class="flex flex-col md:flex-row gap-3 mt-5">
+               <div class="flex flex-col md:flex-row justify-between mt-5">
                    <div>
                         <h1 class="text-xl font-semibold">Features</h1>
                         <ul class="list-disc ml-5">
                            <li>${data.features[1].feature_name}</li>
                            <li>${data.features[2].feature_name}</li>
                            <li>${data.features[3].feature_name}</li>
+                           
                         </ul>
                    </div>
                    <div>
                         <h1 class="text-xl font-semibold">Integrations</h1>
-                        <ul class="list-disc ml-5">
-                            <li>${data.integrations[0]}</li>
-                            <li>${data.integrations[1]}</li>
-                            <li>${data.integrations[2]}</li>
+                        <ul class="list-disc ml-5"> 
+                          ${data.integrations.map(integration => `<li>${integration}</li>`).join("")}
                         </ul>
                    </div>
                </div>
